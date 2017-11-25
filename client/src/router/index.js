@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Card from '@/components/Card'
 import Navbar from '@/components/Navbar'
 import Input from '@/components/Inputs'
+import POrder from '@/components/PharmaOrders'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/input',
       name: 'Input',
       component: Input
+    },
+    {
+      path: '/porder',
+      name: 'POrder',
+      component: POrder
     }
   ]
 })
