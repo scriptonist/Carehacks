@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar'
 import Input from '@/components/Inputs'
 import POrder from '@/components/PharmaOrders'
 import UserHome from '@/components/UserHome'
-
+import UserOrder from '@/components/UserOrder'
 Vue.use(Router)
 
 export default new Router({
@@ -40,6 +40,11 @@ export default new Router({
       path: '/uhome',
       name: 'UserHome',
       component: UserHome
+    },
+    {
+      path: '/uorder',
+      name: 'UserOrder',
+      component: UserOrder
     }
   ]
 })

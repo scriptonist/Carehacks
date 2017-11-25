@@ -1,8 +1,21 @@
 <template>
   <div>
     <nav>
-      <navbar></navbar>
+      <navbar v-bind:navlist="navlist"></navbar>
     </nav>
+    <div class="container-fluid">
+      <div class="col-12 col-xs-12 col-md-12 col-sm-12 col-lg-12">
+        <h2 style="padding-top: 50px;" class="center">Hello, {{user}} </h2>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="col-12 col-xs-12 col-md-12 col-sm-12 col-lg-12">
+        <h1 style="margin-top: 25vh;" class="center">Welcome to {{brandplaceholder}}</h1>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -11,6 +24,22 @@
 
   export default {
     name: 'UserHome',
+    data () {
+      return {
+        navlist: [
+          {
+            name: 'History',
+            link: '/uhistory'
+          },
+          {
+            name: 'Order',
+            link: '/uorder'
+          },
+        ],
+        user: 'User',
+        brandplaceholder: 'Brand Name'
+      }
+    },
     components: {
       'navbar': Navbar
     }

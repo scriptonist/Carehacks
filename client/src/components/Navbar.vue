@@ -10,15 +10,11 @@
 
         <div class="mad-nav-main-center">
           <ul>
-            <li>
-              <a>Order</a>
-            </li>
-            <li>
-              <a>History</a>
+            <li v-for="links in navlist">
+              <router-link v-bind:to="links.link"><a>{{links.name}}</a v-link="'\links.link'"></router-link>
             </li>
           </ul>
         </div>
-
       </div>
     </nav>
 
@@ -27,6 +23,7 @@
 
 <script>
   export default {
+    props: ['navlist'],
     name: 'Home'
   }
 </script>
@@ -37,7 +34,7 @@
   height: 70px;
   display: block;
   width: 100vw;
-  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2), 0 15px 30px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2);
 }
 
 .mad-nav-space{

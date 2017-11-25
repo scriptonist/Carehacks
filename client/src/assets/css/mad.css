@@ -337,3 +337,11 @@ input:focus~.glyphicon{
 .mad-full-screen{
     height: 100vh;
 }
+
+.center{
+    text-align: center;
+}
+
+h1{
+    font-size: 3em;
+}
