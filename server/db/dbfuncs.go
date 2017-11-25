@@ -1,11 +1,9 @@
 package db
 
 import (
-	"fmt"
-
 	"gopkg.in/mgo.v2/bson"
 
-	"github.com/scriptonist/Carehacks/server/daemon"
+	"github.com/scriptonist/Carehacks/server/structs"
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -78,13 +76,13 @@ func insertUserMedicineCourse(user User) error {
 	return nil
 }
 
-func MedicineSearch(searchDetails daemon.SearchForMedicinesRequest) *daemon.SearchForMedicinesResponse {
-	var searchResult []daemon.StoreResult
+func MedicineSearch(searchDetails structs.SearchForMedicinesRequest) *structs.SearchForMedicinesResponse {
+	var searchResult []structs.StoreResult
 	err := store.Find(bson.M{"inventory.name": bson.M{"$all": searchDetails.Medicine}}).All(&searchResult)
 	if err != nil {
 		panic(err)
 	}
-	return &daemon.SearchForMedicinesResponse{Stores: searchResult}
+	return &structs.SearchForMedicinesResponse{Stores: searchResult}
 }
 
 func PlaceOrder(storeID string, order OrderDetails) error {
@@ -106,7 +104,7 @@ func ListOrders(storeID string) Store {
 	return orders
 }
 
-func main() {
-	orders := ListOrders("5a1931df0197d51ab40f7a59")
-	fmt.Println(orders)
-}
+// func main() {
+// 	orders := ListOrders("5a1931df0197d51ab40f7a59")
+// 	fmt.Println(orders)
+// }

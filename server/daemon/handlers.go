@@ -6,8 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/arunvm/cleverhires/Core-API/globals"
 	"github.com/scriptonist/Carehacks/server/azure"
+	db "github.com/scriptonist/Carehacks/server/db"
+	"github.com/scriptonist/Carehacks/server/structs"
 )
 
 // PongHandler Return pong
@@ -32,13 +33,13 @@ func PongHandler() http.Handler {
 func SearchForMedicines() http.Handler {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
-			query := SearchForMedicinesRequest{}
+			query := structs.SearchForMedicinesRequest{}
 			err := json.NewDecoder(r.Body).Decode(&query)
 			if err != nil {
 				respondWithError(w, http.StatusBadRequest, err.Error())
 			}
-
-			respondWithJSON(w, http.StatusOK, "not implemented")
+			res := db.MedicineSearch(query)
+			respondWithJSON(w, http.StatusOK, res)
 		},
 	)
 }
@@ -66,7 +67,7 @@ func UploadPrescription() http.Handler {
 
 		log.Println(file)
 		if err != nil {
-			respondWithJSON(w, http.StatusInternalServerError, UploadPrescriptionResponse{
+			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
 				Message: "Upload Failed",
 				Done:    false,
 			})
@@ -76,7 +77,7 @@ func UploadPrescription() http.Handler {
 
 		l, err := file.Read(fileContents)
 		if err != nil {
-			respondWithJSON(w, http.StatusInternalServerError, UploadPrescriptionResponse{
+			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
 				Message: "Upload Failed",
 				Done:    false,
 			})
@@ -85,13 +86,13 @@ func UploadPrescription() http.Handler {
 		log.Println(l)
 		url, err := azure.CreatePrescriptionBlob(h.Filename, &fileContents, mimeType)
 		if err != nil {
-			respondWithJSON(w, http.StatusInternalServerError, UploadPrescriptionResponse{
+			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
 				Message: "Upload Failed",
 				Done:    false,
 			})
 		}
 
-		respondWithJSON(w, http.StatusInternalServerError, UploadPrescriptionResponse{
+		respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
 			Message: "Upload Done",
 			Done:    true,
 			URL:     url,
@@ -110,7 +111,7 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 }
 
 func respondWithError(w http.ResponseWriter, code int, message string) {
-	respondWithJSON(w, code, globals.ErrorResponse{
+	respondWithJSON(w, code, struct{ Error string }{
 		Error: message,
 	})
 	return

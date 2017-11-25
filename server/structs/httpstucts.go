@@ -1,15 +1,19 @@
-package daemon
+package structs
+
+import (
+	"gopkg.in/mgo.v2/bson"
+)
 
 // ----------------- Handler - SearchForMedicines  ---------------//
 
 //StoreResult Represents a store
 // An array of this struct will be returned
 // As result for SearchForMedicines
-type storeResult struct {
-	StoreName string `json:"storename" bson:"Name"`
-	StoreID   string `bson:"_id" json:"store_id"`
-	Distance  string `json:"distance"`
-	Avialable bool   `json:"avialable"`
+type StoreResult struct {
+	StoreName string        `json:"storename" bson:"Name"`
+	StoreID   bson.ObjectId `bson:"_id" json:"store_id"`
+	Distance  string        `json:"distance"`
+	Avialable bool          `json:"avialable"`
 }
 
 // SearchForMedicinesRequest --
@@ -17,8 +21,8 @@ type storeResult struct {
 // endpoint - /search
 type SearchForMedicinesRequest struct {
 	Medicine []string `json:"medicine"`
-	Lat      int      `json:"lat"`
-	Lon      int      `json:"lon"`
+	Lat      float32  `json:"lat"`
+	Lon      float32  `json:"lon"`
 }
 
 // SearchForMedicinesResponse --
