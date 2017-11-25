@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Card from '@/components/Card'
 import Navbar from '@/components/Navbar'
 import Input from '@/components/Inputs'
+import UserHome from '@/components/UserHome'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/input',
       name: 'Input',
       component: Input
+    },
+    {
+      path: '/uhome',
+      name: 'UserHome',
+      component: UserHome
     }
   ]
 })
