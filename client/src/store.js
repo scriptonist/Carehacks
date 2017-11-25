@@ -8,7 +8,13 @@ export default new Vuex.Store({
     date: null,
     day: null,
     month: null,
-    year: null
+    year: null,
+    username: null,
+    usernumber: null,
+    useremail: null,
+    userlocation: null,
+    usermedno: null,
+    userstatus: null
   },
   getters: {
     getDate: (state) => {
@@ -22,6 +28,21 @@ export default new Vuex.Store({
     },
     getYear: (state) => {
       return state.year
+    },
+    getUserName: (state) => {
+      return state.username
+    },
+    getUserEmail: (state) => {
+      return state.useremail
+    },
+    getUserLocation: (state) => {
+      return state.userlocation
+    },
+    getUserMedNo: (state) => {
+      return state.usermedno
+    },
+    getUserStatus: (state) => {
+      return state.userstatus
     }
   },
   mutations: {
@@ -36,6 +57,21 @@ export default new Vuex.Store({
     },
     setYear: (state, year) => {
       state.year = year
+    },
+    setUserName: (state, username) => {
+      state.username = username
+    },
+    setUserEmail: (state, useremail) => {
+      state.useremail = useremail
+    },
+    setUserLocation: (state, userlocation) => {
+      state.userlocation = userlocation
+    },
+    setUserMedNo: (state, usermedno) => {
+      state.usermedno = usermedno
+    },
+    setUserStatus: (state, userstatus) => {
+      state.userstatus = userstatus
     }
   },
   actions: {
