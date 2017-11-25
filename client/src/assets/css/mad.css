@@ -73,16 +73,16 @@ button{
 }
 
 .mad-button-border-default{
-    border-color:#795be2;
+    border-color:white;
     border-width: 2.5px;
     padding-left: 25px;
     padding-right: 25px;
     height: 40px;
     border-radius: 25px;
-    color: #795be2;
+    color: white;
     transition: all  0.35s ease-out;
     border-style: solid;
-    background-color: white;    
+    background-color: none;    
     font-family: 'Quicksand', sans-serif;
     font-weight: 400;
     font-size: 1.5rem;
@@ -95,7 +95,7 @@ button{
     border-width: 2.5px;
     color: #f74f61;
     border-style: solid;
-    background-color: white;
+    background-color: none;
     border-radius: 18px;
 }
 

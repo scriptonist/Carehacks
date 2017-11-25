@@ -10,9 +10,21 @@ export default new Vuex.Store({
     month: null,
     year: null,
     meds: [],
-    cart: null
+    cart: true,
+    username: null,
+    usernumber: null,
+    useremail: null,
+    userlocation: null,
+    usermedno: null,
+    userstatus: null,
+    pharmaId: null,
+    usermedicines: null,
+    orderdetail: null
   },
   getters: {
+    getOrderDetail: (state) => {
+      return state.orderdetail
+    },
     getDate: (state) => {
       return state.date
     },
@@ -34,9 +46,36 @@ export default new Vuex.Store({
       } else {
         return false
       }
+    },
+    getUserName: (state) => {
+      return state.username
+    },
+    getUserEmail: (state) => {
+      return state.useremail
+    },
+    getUserLocation: (state) => {
+      return state.userlocation
+    },
+    getUserMedNo: (state) => {
+      return state.usermedno
+    },
+    getUserStatus: (state) => {
+      return state.userstatus
+    },
+    getUserNumber: (state) => {
+      return state.usernumber
+    },
+    getPharmaId: (state) => {
+      return state.pharmaId
+    },
+    getUserMedicines: (state) => {
+      return state.usermedicines
     }
   },
   mutations: {
+    setOrderDetail: (state, orderdetail) => {
+      state.orderdetail = orderdetail
+    },
     setDate: (state, date) => {
       state.date = date
     },
@@ -71,8 +110,32 @@ export default new Vuex.Store({
           state.meds.push(n)
         }
       }
-      // console.log(state.meds.length)
+      console.log(state.meds.length)
       // console.log(state.meds[0].id)
+    },
+    setUserName: (state, username) => {
+      state.username = username
+    },
+    setUserEmail: (state, useremail) => {
+      state.useremail = useremail
+    },
+    setUserLocation: (state, userlocation) => {
+      state.userlocation = userlocation
+    },
+    setUserMedNo: (state, usermedno) => {
+      state.usermedno = usermedno
+    },
+    setUserStatus: (state, userstatus) => {
+      state.userstatus = userstatus
+    },
+    setUserNumber: (state, usernumber) => {
+      state.usernumber = usernumber
+    },
+    setPharmaId: (state, pharmId) => {
+      state.pharmId = pharmId
+    },
+    setUserMedicines: (state, usermedicines) => {
+      state.usermedicines = usermedicines
     }
   },
   actions: {

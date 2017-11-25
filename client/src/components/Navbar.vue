@@ -62,7 +62,7 @@
 .mad-nav-space{
   padding-top: 20px;
   padding-left: 20px;
-  padding-right: 20px;
+  padding-right: 40px;
   display: block;
   height: 50px;
 }

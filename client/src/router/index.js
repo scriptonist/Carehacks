@@ -5,9 +5,12 @@ import Card from '@/components/Card'
 import Navbar from '@/components/Navbar'
 import Input from '@/components/Inputs'
 import POrder from '@/components/PharmaOrders'
+import POrderDet from '@/components/PharmaOrderDet'
 import UserHome from '@/components/UserHome'
 import UserOrder from '@/components/UserOrder'
 import UserCart from '@/components/UserCart'
+import Upload from '@/components/Upload'
+import Confirm from '@/components/UserConfirm'
 Vue.use(Router)
 
 export default new Router({
@@ -38,6 +41,11 @@ export default new Router({
       component: POrder
     },
     {
+      path: '/porder/details',
+      name: 'POrderDet',
+      component: POrderDet
+    },
+    {
       path: '/uhome',
       name: 'UserHome',
       component: UserHome
@@ -51,6 +59,16 @@ export default new Router({
       path: '/ucart',
       name: 'UserCart',
       component: UserCart
+    },
+    {
+      path: '/uuploadprescription',
+      name: 'Upload',
+      component: Upload
+    },
+    {
+      path: '/uconfirm',
+      name: 'Confirm',
+      component: Confirm
     }
   ]
 })
