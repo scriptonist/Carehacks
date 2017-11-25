@@ -5,6 +5,7 @@ import Card from '@/components/Card'
 import Navbar from '@/components/Navbar'
 import Input from '@/components/Inputs'
 import POrder from '@/components/PharmaOrders'
+import POrderDet from '@/components/PharmaOrderDet'
 import UserHome from '@/components/UserHome'
 import UserOrder from '@/components/UserOrder'
 Vue.use(Router)
@@ -35,6 +36,11 @@ export default new Router({
       path: '/porder',
       name: 'POrder',
       component: POrder
+    },
+    {
+      path: '/porder/details',
+      name: 'POrderDet',
+      component: POrderDet
     },
     {
       path: '/uhome',
