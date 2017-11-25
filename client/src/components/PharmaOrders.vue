@@ -71,6 +71,7 @@ export default {
   },
   computed: {
     orderDetails: function () {
+      // @TODO: Link this when connected to actual Api
       return this.$store.getters.getOrderDetail
     }
   },
