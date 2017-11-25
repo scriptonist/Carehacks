@@ -95,7 +95,7 @@ func UploadPrescription() http.Handler {
 			return
 		}
 
-		respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
+		respondWithJSON(w, http.StatusAccepted, structs.UploadPrescriptionResponse{
 			Message: "Upload Done",
 			Done:    true,
 			URL:     url,
