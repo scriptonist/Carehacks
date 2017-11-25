@@ -78,10 +78,8 @@ func insertUserMedicineCourse(user User) error {
 
 func MedicineSearch(searchDetails structs.SearchForMedicinesRequest) *structs.SearchForMedicinesResponse {
 	var searchResult []structs.StoreResult
-	err := store.Find(bson.M{"inventory.name": bson.M{"$all": searchDetails.Medicine}}).All(&searchResult)
-	if err != nil {
-		panic(err)
-	}
+	store.Find(bson.M{"inventory.name": bson.M{"$all": searchDetails.Medicine}, "coordinates": bson.M{"$geoWithin": bson.M{"$centerSphere": []interface{}{[]interface{}{searchDetails.Lat, searchDetails.Lon}, 5 / 3963.2}}}}).All(&searchResult)
+
 	return &structs.SearchForMedicinesResponse{Stores: searchResult}
 }
 
