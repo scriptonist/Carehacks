@@ -3,6 +3,7 @@ package daemon
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/scriptonist/Carehacks/server/azure"
@@ -31,6 +32,11 @@ func PongHandler() http.Handler {
 func SearchForMedicines() http.Handler {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
+			query := SearchForMedicinesRequest{}
+			err := json.NewDecoder(r.Body).Decode(&query)
+			if err != nil {
+				respondWithError(w, http.StatusBadRequest, err.Error())
+			}
 
 			respondWithJSON(w, http.StatusOK, "not implemented")
 		},
@@ -53,17 +59,43 @@ func UserOrder() http.Handler {
 // Accepts image files with presciption details
 func UploadPrescription() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Println("Saving file")
 		r.ParseMultipartForm(32 << 20)
-		file, handler, err := r.FormFile("uploadfile")
+		file, h, err := r.FormFile("file")
+		mimeType := h.Header.Get("Content-Type")
+
+		log.Println(file)
 		if err != nil {
-			fmt.Println(err)
-			return
+			respondWithJSON(w, http.StatusInternalServerError, UploadPrescriptionResponse{
+				Message: "Upload Failed",
+				Done:    false,
+			})
 		}
 		defer file.Close()
-		var fileContents []byte
-		_, err = file.Read(fileContents)
-		azure.CreatePrescriptionBlob(handler.Filename, &fileContents)
+		fileContents := make([]byte, h.Size)
 
+		l, err := file.Read(fileContents)
+		if err != nil {
+			respondWithJSON(w, http.StatusInternalServerError, UploadPrescriptionResponse{
+				Message: "Upload Failed",
+				Done:    false,
+			})
+		}
+
+		log.Println(l)
+		url, err := azure.CreatePrescriptionBlob(h.Filename, &fileContents, mimeType)
+		if err != nil {
+			respondWithJSON(w, http.StatusInternalServerError, UploadPrescriptionResponse{
+				Message: "Upload Failed",
+				Done:    false,
+			})
+		}
+
+		respondWithJSON(w, http.StatusInternalServerError, UploadPrescriptionResponse{
+			Message: "Upload Done",
+			Done:    true,
+			URL:     url,
+		})
 	},
 	)
 }
