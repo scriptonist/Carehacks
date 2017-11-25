@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"gopkg.in/mgo.v2/bson"
 
 	mgo "gopkg.in/mgo.v2"
@@ -75,22 +77,32 @@ func insertUserMedicineCourse(user User) error {
 	return nil
 }
 
-func MedicineSearch(searchTerm string) []bson.M {
-
-	var searchResult []bson.M
-	regex := bson.M{"$regex": bson.RegEx{Pattern: searchTerm, Options: "i"}}
-	pipe := store.Pipe([]bson.M{
-		{"$unwind": "$inventory"},
-		{"$match": bson.M{"inventory.name": regex}},
-		{"$project": bson.M{"Name": 1, "Location": 1, "inventory.name": 1}}})
-
-	err := pipe.All(&searchResult)
-	if err != nil {
-		panic(err)
-	}
+func MedicineSearch(searchDetails daemon.SearchForMedicinesRequest) []bson.M {
+	var searchResult daemon.storeResult
+	err := store.Find(bson.M{"inventory.name":bson.M{"$all":searchDetails.Medicine}).One(&)
 	return searchResult
 }
 
+func PlaceOrder(storeID string, order OrderDetails) error {
+	err := store.Update(bson.M{"_id": bson.ObjectIdHex(storeID)}, bson.M{"$push": bson.M{"orders": order}})
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func ListOrders(storeID string) Store {
+	var orders Store
+	err := store.Find(bson.M{"_id": bson.ObjectIdHex(storeID)}).Select(bson.M{"orders": 1}).One(&orders)
+	if err != nil {
+		panic(err)
+	}
+
+	return orders
+}
+
 func main() {
-	MedicineSearch("vic")
+	orders := ListOrders("5a1931df0197d51ab40f7a59")
+	fmt.Println(orders)
 }
