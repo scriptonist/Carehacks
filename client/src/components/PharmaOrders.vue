@@ -6,7 +6,7 @@
     <div class="continer">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-         <div class="m-card-depth"></div>
+          <h1 class="m-user-title m-opensans-300">Hi, Pharmacy</h1>
         </div>
       </div>
     </div>
@@ -23,8 +23,14 @@ export default {
 </script>
 
 <style scoped>
-.m-card-depth {
-  background: #795be2;
-  display:
+.m-user-title {
+  color: #000000;
+  text-align: center;
+  margin-top: 3%;
+}
+
+.m-opensans-300 {
+  font-family: 'Open Sans';
+  font-weight: 300;
 }
 </style>
