@@ -8,9 +8,21 @@ export default new Vuex.Store({
     date: null,
     day: null,
     month: null,
-    year: null
+    year: null,
+    username: null,
+    usernumber: null,
+    useremail: null,
+    userlocation: null,
+    usermedno: null,
+    userstatus: null,
+    pharmId: null,
+    usermedicines: null,
+    orderdetail: null
   },
   getters: {
+    getOrderDetail: (state) => {
+      return state.orderdetail
+    },
     getDate: (state) => {
       return state.date
     },
@@ -22,9 +34,36 @@ export default new Vuex.Store({
     },
     getYear: (state) => {
       return state.year
+    },
+    getUserName: (state) => {
+      return state.username
+    },
+    getUserEmail: (state) => {
+      return state.useremail
+    },
+    getUserLocation: (state) => {
+      return state.userlocation
+    },
+    getUserMedNo: (state) => {
+      return state.usermedno
+    },
+    getUserStatus: (state) => {
+      return state.userstatus
+    },
+    getUserNumber: (state) => {
+      return state.usernumber
+    },
+    getPharmId: (state) => {
+      return state.pharmId
+    },
+    getUserMedicines: (state) => {
+      return state.usermedicines
     }
   },
   mutations: {
+    setOrderDetail: (state, orderdetail) => {
+      state.orderdetail = orderdetail
+    },
     setDate: (state, date) => {
       state.date = date
     },
@@ -36,6 +75,30 @@ export default new Vuex.Store({
     },
     setYear: (state, year) => {
       state.year = year
+    },
+    setUserName: (state, username) => {
+      state.username = username
+    },
+    setUserEmail: (state, useremail) => {
+      state.useremail = useremail
+    },
+    setUserLocation: (state, userlocation) => {
+      state.userlocation = userlocation
+    },
+    setUserMedNo: (state, usermedno) => {
+      state.usermedno = usermedno
+    },
+    setUserStatus: (state, userstatus) => {
+      state.userstatus = userstatus
+    },
+    setUserNumber: (state, usernumber) => {
+      state.usernumber = usernumber
+    },
+    setPharmId: (state, pharmId) => {
+      state.pharmId = pharmId
+    },
+    setUserMedicines: (state, usermedicines) => {
+      state.usermedicines = usermedicines
     }
   },
   actions: {

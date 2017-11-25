@@ -34,7 +34,7 @@
           {
             name: 'Order',
             link: '/uorder'
-          },
+          }
         ],
         user: 'User',
         brandplaceholder: 'Brand Name'
