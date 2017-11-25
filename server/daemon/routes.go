@@ -15,6 +15,8 @@ import (
 		lat:
 		lon:
 	}
+	/user/upload_presciption
+
 	/user/order
 		{
 			user_id
@@ -55,7 +57,8 @@ import (
 */
 func initRoutes() *mux.Router {
 	m := mux.NewRouter()
-	m.Handle("/pong", PongHandler()).Methods("GET")
-
+	m.Handle("/search", SearchForMedicines()).Methods("POST")
+	m.Handle("/user/upload_prescription", UploadPrescription()).Methods("POST")
+	m.Handle("/user/order", UserOrder()).Methods("POST")
 	return m
 }
