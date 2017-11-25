@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <ul class="card-holder">
-                <li class="mad-card" v-for="order in orderDetail">
+                <li class="mad-card" v-for="order in orderDetail" v-on:click="orderDetailDisp">
                     <div class="mad-card-h1">{{ order.name }}</div>
                     <div class="mad-card-hr"></div>
                     <div class="mad-card-h2">{{ order.email }}</div>
@@ -64,8 +64,13 @@ export default {
       ]
     }
   },
+  methods: {
+    orderDetailDisp: function () {
+      this.$router.push({path: '/porder/details'})
+    }
+  },
   computed: {
-    orderDetails: () => {
+    orderDetails: function () {
       return this.$store.getters.getOrderDetail
     }
   },
