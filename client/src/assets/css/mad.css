@@ -188,6 +188,10 @@ input {
     height: 40px;
     transition: all 0.3s ease-in;
     text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
 }
 
 input:active,
@@ -195,13 +199,10 @@ input:focus {
     border-color: #f74f61;
 }
 
-.search {
-    position: relative;
-}
 
 input~.glyphicon{
     position: absolute;
-    right: 49.5%;
+    right: 47.5%;
     font-size: 2.2rem;
     transition: all 0.3s ease-in;
     color: #795be2
@@ -218,7 +219,7 @@ input:focus~.glyphicon{
 .card-holder {
 	background: white;
 	display: flex;
-	flex-wrap: wrap;
+    flex-wrap: wrap;  
 }
 
 .mad-card {
@@ -342,6 +343,16 @@ input:focus~.glyphicon{
     text-align: center;
 }
 
+.center-align{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 h1{
     font-size: 3em;
+}
+
+.welcome{
+    z-index: ;
 }

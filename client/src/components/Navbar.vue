@@ -14,7 +14,13 @@
               <router-link v-bind:to="links.link"><a>{{links.name}}</a v-link="'\links.link'"></router-link>
             </li>
           </ul>
+          
         </div>
+
+        <div class="button-proceed">
+           <button v-on:click="clicker()" v-if="cart" class="mad-button-default">Cart - {{total}} </button>
+        </div>
+
       </div>
     </nav>
 
@@ -24,7 +30,23 @@
 <script>
   export default {
     props: ['navlist'],
-    name: 'Home'
+    name: 'Home',
+    computed: {
+      total: function () {
+        return this.$store.getters.getTotalCart
+      },
+      cart: function () {
+        return this.$store.getters.getCart
+      }
+    },
+    methods: {
+      clicker: function () {
+        console.log('asda')
+        if (this.total > 0) {
+          this.$router.push({path: '/ucart'})
+        }
+      }
+    }
   }
 </script>
 
@@ -90,5 +112,8 @@
   color: #f74f61;
 }
 
-
+.button-proceed{
+  float: right;
+  margin-top: -5px;
+}
 </style>

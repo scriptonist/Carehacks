@@ -7,6 +7,7 @@ import Input from '@/components/Inputs'
 import POrder from '@/components/PharmaOrders'
 import UserHome from '@/components/UserHome'
 import UserOrder from '@/components/UserOrder'
+import UserCart from '@/components/UserCart'
 Vue.use(Router)
 
 export default new Router({
@@ -45,6 +46,11 @@ export default new Router({
       path: '/uorder',
       name: 'UserOrder',
       component: UserOrder
+    },
+    {
+      path: '/ucart',
+      name: 'UserCart',
+      component: UserCart
     }
   ]
 })
