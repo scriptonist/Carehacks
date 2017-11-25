@@ -68,9 +68,10 @@ func UploadPrescription() http.Handler {
 		log.Println(file)
 		if err != nil {
 			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
-				Message: "Upload Failed",
+				Message: fmt.Sprintf("Upload Failed %v", err),
 				Done:    false,
 			})
+			return
 		}
 		defer file.Close()
 		fileContents := make([]byte, h.Size)
@@ -78,18 +79,20 @@ func UploadPrescription() http.Handler {
 		l, err := file.Read(fileContents)
 		if err != nil {
 			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
-				Message: "Upload Failed",
+				Message: "Failed to read contents of file",
 				Done:    false,
 			})
+			return
 		}
 
 		log.Println(l)
 		url, err := azure.CreatePrescriptionBlob(h.Filename, &fileContents, mimeType)
 		if err != nil {
 			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
-				Message: "Upload Failed",
+				Message: fmt.Sprintf("Upload Failed %v", err),
 				Done:    false,
 			})
+			return
 		}
 
 		respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
