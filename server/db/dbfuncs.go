@@ -78,15 +78,14 @@ func insertUserMedicineCourse(user User) error {
 
 func MedicineSearch(searchDetails structs.SearchForMedicinesRequest) *structs.SearchForMedicinesResponse {
 	var searchResult []structs.StoreResult
-	err := store.Find(bson.M{"inventory.name": bson.M{"$all": searchDetails.Medicine}}).All(&searchResult)
-	if err != nil {
-		panic(err)
-	}
+	store.Find(bson.M{"inventory.name": bson.M{"$all": searchDetails.Medicine}, "coordinates": bson.M{"$geoWithin": bson.M{"$centerSphere": []interface{}{[]interface{}{searchDetails.Lat, searchDetails.Lon}, 5 / 3963.2}}}}).All(&searchResult)
+
 	return &structs.SearchForMedicinesResponse{Stores: searchResult}
 }
 
-func PlaceOrder(storeID string, order OrderDetails) error {
-	err := store.Update(bson.M{"_id": bson.ObjectIdHex(storeID)}, bson.M{"$push": bson.M{"orders": order}})
+func PlaceOrder(order structs.UserOrderRequest) error {
+	order.Status = "False"
+	err := store.Update(bson.M{"_id": bson.ObjectIdHex(order.StoreID)}, bson.M{"$push": bson.M{"orders": order}})
 	if err != nil {
 		return err
 	}

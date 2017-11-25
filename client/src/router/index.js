@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import Input from '@/components/Inputs'
 import POrder from '@/components/PharmaOrders'
 import POrderDet from '@/components/PharmaOrderDet'
+import PStore from '@/components/PharmaStore'
 import UserHome from '@/components/UserHome'
 import UserOrder from '@/components/UserOrder'
 import UserCart from '@/components/UserCart'
@@ -44,6 +45,11 @@ export default new Router({
       path: '/porder/details',
       name: 'POrderDet',
       component: POrderDet
+    },
+    {
+      path: '/pstore',
+      name: 'PStore',
+      component: PStore
     },
     {
       path: '/uhome',

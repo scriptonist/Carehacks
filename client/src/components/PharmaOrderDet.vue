@@ -24,6 +24,32 @@
           </div>
       </div>
     </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="card-holder">
+                <li class="mad-card" v-for="med in medicines" v-on:click="orderDetailDisp">
+                    <div class="mad-card-h1">{{ med.medName }}</div>
+                    <div class="mad-card-h2">Quantity : - {{ med.medQty }}</div>
+                    <div class="mad-card-h3">Price : - {{ med.medPrice }}</div>
+                    <label class="m-label"><input type="checkbox" class="checkbox" id="check1" value="morning" />Morning</label>
+                    <label class="m-label"><input type="checkbox" class="checkbox" id="check2" value="afternoon"/>Afternoon</label>
+                    <label class="m-label"><input type="checkbox" class="checkbox" id="check3" value="evening"/>Evening</label>
+                </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <button class="m-btn mad-button-default" v-on:click="confirm">Confirmed</button>
+        </div>
+      </div>
+    </div>
+
     </div>
   </div>
 </template>
@@ -53,12 +79,12 @@ export default {
         {
           medName: 'Adol 500mg',
           medQty: 3,
-          price: 29
+          medPrice: 29
         },
         {
           medName: 'Adol 500mg',
           medQty: 3,
-          price: 29
+          medPrice: 29
         }
       ],
       navlist: [
@@ -80,6 +106,19 @@ export default {
 </script>
 
 <style scoped>
+.m-btn {
+  margin-left: 80%;
+}
+.m-label {
+  padding-top: 10px;
+  padding-left: 20px;
+  color: #ffffff;
+  font-family: 'Quicksand';
+}
+.m-table {
+  margin-left: 30%;
+  margin-top: 5%;
+}
 .m-user-title {
   color: #000000;
   text-align: center;
