@@ -34,13 +34,14 @@
 <style scoped>
 .mad-nav{
   background-color: rgba(0,0,0,1);
-  height: 50px;
+  height: 70px;
   display: block;
   width: 100vw;
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2), 0 15px 30px 0 rgba(0,0,0,0.19);
 }
 
 .mad-nav-space{
-  padding-top: 10px;
+  padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
   display: block;
