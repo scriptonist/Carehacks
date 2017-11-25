@@ -1,6 +1,6 @@
 package main
 
-import "github.com/scriptonist/gitnots/server/daemon"
+import "github.com/scriptonist/Carehacks/server/daemon"
 
 func main() {
 	daemonConfig := daemon.Config{
