@@ -14,6 +14,7 @@
     "axios": "^0.17.1",
     "v-calendar": "^0.3.0",
     "vue": "^2.5.2",
+    "vue-good-table": "^1.16.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
