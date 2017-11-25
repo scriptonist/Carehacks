@@ -43,6 +43,9 @@ export default new Vuex.Store({
     },
     getUserStatus: (state) => {
       return state.userstatus
+    },
+    getUserNumber: (state) => {
+      return state.usernumber
     }
   },
   mutations: {
@@ -72,6 +75,9 @@ export default new Vuex.Store({
     },
     setUserStatus: (state, userstatus) => {
       state.userstatus = userstatus
+    },
+    setUserNumber: (state, usernumber) => {
+      state.usernumber = usernumber
     }
   },
   actions: {
