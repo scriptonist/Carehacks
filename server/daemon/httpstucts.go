@@ -1,7 +1,8 @@
 package daemon
 
 // ----------------- Handler - SearchForMedicines  ---------------//
-// Represents a store
+
+//StoreResult Represents a store
 // An array of this struct will be returned
 // As result for SearchForMedicines
 type storeResult struct {
@@ -24,7 +25,7 @@ type SearchForMedicinesRequest struct {
 // Request format for
 // endpoint - /search
 type SearchForMedicinesResponse struct {
-	Stores []storeResult `json:"stores"`
+	Stores []StoreResult `json:"stores"`
 }
 
 // ----------------- Handler - UserOrder  ---------------//
@@ -37,7 +38,7 @@ type UserOrderRequest struct {
 	Prescription string   `json:"prescription"`
 }
 
-// UserOrderResponse
+// UserOrderResponse a
 type UserOrderResponse struct {
 }
 

@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/arunvm/cleverhires/Core-API/globals"
 	"github.com/scriptonist/Carehacks/server/azure"
-	"github.com/scriptonist/cleverhires/API/globals"
 )
 
 // PongHandler Return pong
