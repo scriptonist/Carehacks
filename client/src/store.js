@@ -14,7 +14,8 @@ export default new Vuex.Store({
     useremail: null,
     userlocation: null,
     usermedno: null,
-    userstatus: null
+    userstatus: null,
+    pharmId: null
   },
   getters: {
     getDate: (state) => {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     getUserNumber: (state) => {
       return state.usernumber
+    },
+    getPharmId: (state) => {
+      return state.pharmId
     }
   },
   mutations: {
@@ -78,6 +82,9 @@ export default new Vuex.Store({
     },
     setUserNumber: (state, usernumber) => {
       state.usernumber = usernumber
+    },
+    setPharmId: (state, pharmId) => {
+      state.pharmId = pharmId
     }
   },
   actions: {
