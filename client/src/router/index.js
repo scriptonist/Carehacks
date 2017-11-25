@@ -7,6 +7,7 @@ import Input from '@/components/Inputs'
 import POrder from '@/components/PharmaOrders'
 import POrderDet from '@/components/PharmaOrderDet'
 import PStore from '@/components/PharmaStore'
+import PHome from '@/components/PharmaHome'
 import UserHome from '@/components/UserHome'
 import UserOrder from '@/components/UserOrder'
 import UserCart from '@/components/UserCart'
@@ -35,6 +36,11 @@ export default new Router({
       path: '/input',
       name: 'Input',
       component: Input
+    },
+    {
+      path: '/phome',
+      name: 'PHome',
+      component: PHome
     },
     {
       path: '/porder',
