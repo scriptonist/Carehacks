@@ -15,9 +15,9 @@ type storeResult struct {
 // Request format for
 // endpoint - /search
 type SearchForMedicinesRequest struct {
-	Medicine string `json:"medicine"`
-	Lat      int    `json:"lat"`
-	Lon      int    `json:"lon"`
+	Medicine []string `json:"medicine"`
+	Lat      int      `json:"lat"`
+	Lon      int      `json:"lon"`
 }
 
 // SearchForMedicinesResponse --
@@ -35,4 +35,17 @@ type UserOrderRequest struct {
 	Medicines    []string `json:"medicines"`
 	StoreID      string   `json:"store_id"`
 	Prescription string   `json:"prescription"`
+}
+
+// UserOrderResponse
+type UserOrderResponse struct {
+}
+
+// --------------Handler - UploadPrescription -------//
+
+// UploadPrescriptionResponse --
+type UploadPrescriptionResponse struct {
+	Message string `json:"message"`
+	Done    bool   `json:"done"`
+	URL     string `json:"url,omitempty"`
 }

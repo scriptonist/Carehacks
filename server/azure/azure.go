@@ -49,10 +49,10 @@ func CreateQRFileBlob(filename string, content *[]byte) (string, error) {
 }
 
 // CreatePrescriptionBlob a blob for QR Code
-func CreatePrescriptionBlob(filename string, content *[]byte) (string, error) {
+func CreatePrescriptionBlob(filename string, content *[]byte, mimeType string) (string, error) {
 	// Get reference to blob
 	blob := carehackPrescriptions.GetBlobReference(filename)
-	blob.Properties.ContentType = "image/png"
+	blob.Properties.ContentType = mimeType
 	// Create block blob
 	err := blob.PutAppendBlob(nil)
 
