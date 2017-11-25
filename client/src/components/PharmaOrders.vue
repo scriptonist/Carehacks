@@ -64,6 +64,11 @@ export default {
       ]
     }
   },
+  computed: {
+    orderDetails: () => {
+      return this.$store.getters.getOrderDetail
+    }
+  },
   components: {
     'm-navbar': Navbar
   }

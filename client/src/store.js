@@ -15,9 +15,14 @@ export default new Vuex.Store({
     userlocation: null,
     usermedno: null,
     userstatus: null,
-    pharmId: null
+    pharmId: null,
+    usermedicines: null,
+    orderdetail: null
   },
   getters: {
+    getOrderDetail: (state) => {
+      return state.orderdetail
+    },
     getDate: (state) => {
       return state.date
     },
@@ -50,9 +55,15 @@ export default new Vuex.Store({
     },
     getPharmId: (state) => {
       return state.pharmId
+    },
+    getUserMedicines: (state) => {
+      return state.usermedicines
     }
   },
   mutations: {
+    setOrderDetail: (state, orderdetail) => {
+      state.orderdetail = orderdetail
+    },
     setDate: (state, date) => {
       state.date = date
     },
@@ -85,6 +96,9 @@ export default new Vuex.Store({
     },
     setPharmId: (state, pharmId) => {
       state.pharmId = pharmId
+    },
+    setUserMedicines: (state, usermedicines) => {
+      state.usermedicines = usermedicines
     }
   },
   actions: {
