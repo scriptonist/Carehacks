@@ -5,8 +5,8 @@ package daemon
 // An array of this struct will be returned
 // As result for SearchForMedicines
 type storeResult struct {
-	StoreName string `json:"storename"` `bson:"Name"`
-	StoreID string   `bson:"_id"`
+	StoreName string `json:"storename" bson:"Name"`
+	StoreID   string `bson:"_id" json:"store_id"`
 	Distance  string `json:"distance"`
 	Avialable bool   `json:"avialable"`
 }
