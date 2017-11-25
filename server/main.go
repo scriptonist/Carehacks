@@ -1,12 +1,17 @@
 package main
 
-import "github.com/scriptonist/Carehacks/server/daemon"
+import (
+	"flag"
+
+	"github.com/scriptonist/Carehacks/server/daemon"
+)
 
 func main() {
-	daemonConfig := daemon.Config{
-		Listenspec: "localhost:9080",
-	}
 
+	daemonConfig := daemon.Config{}
+
+	flag.StringVar(&daemonConfig.Listenspec, "listen", "0.0.0.0:9080", "HTTP listen spec")
+	flag.Parse()
 	daemon.StartServer(daemonConfig)
 
 }

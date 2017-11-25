@@ -4,7 +4,11 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"os"
 	"time"
+
+	"github.com/gorilla/handlers"
+	"github.com/rs/cors"
 )
 
 // Config --
@@ -26,6 +30,10 @@ func StartServer(cfg Config) {
 		MaxHeaderBytes: 1 << 20,
 	}
 	router := initRoutes()
-	http.Handle("/", router)
+
+	loggedRouter := handlers.LoggingHandler(os.Stdout, router)
+	handlerWithCORS := cors.Default().Handler(loggedRouter)
+	http.Handle("/", handlerWithCORS)
+
 	server.Serve(l)
 }
