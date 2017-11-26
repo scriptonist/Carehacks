@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/scriptonist/Carehacks/server/azure"
 	db "github.com/scriptonist/Carehacks/server/db"
 	"github.com/scriptonist/Carehacks/server/structs"
@@ -50,6 +51,15 @@ func SearchForMedicines() http.Handler {
 func UserOrder() http.Handler {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
+			order := structs.UserOrderRequest{}
+			err := json.NewDecoder(r.Body).Decode(&order)
+			if err != nil {
+				respondWithError(w, http.StatusBadRequest, err.Error())
+			}
+			err = db.PlaceOrder(order)
+			if err != nil {
+				respondWithError(w, http.StatusBadRequest, err.Error())
+			}
 
 			respondWithJSON(w, http.StatusOK, "not implemented")
 		},
@@ -95,12 +105,24 @@ func UploadPrescription() http.Handler {
 			return
 		}
 
-		respondWithJSON(w, http.StatusAccepted, structs.UploadPrescriptionResponse{
+		respondWithJSON(w, http.StatusOK, structs.UploadPrescriptionResponse{
 			Message: "Upload Done",
 			Done:    true,
 			URL:     url,
 		})
 	},
+	)
+}
+
+// ValidateQR --
+func ValidateQR() http.Handler {
+	return http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			vars := mux.Vars(r)
+			userID := vars["user_id"]
+			// Find user Id in users table and delete it.
+			log.Println("Validated ", userID)
+		},
 	)
 }
 
