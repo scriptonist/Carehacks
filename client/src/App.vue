@@ -11,4 +11,9 @@ export default {
 </script>
 
 <style>
+body {
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+}
+
 </style>
