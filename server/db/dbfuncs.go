@@ -120,6 +120,24 @@ func ListOrders(storeID string) Store {
 	return orders
 }
 
+func InsertQrURLInUsersCollection(userID string, QRurl string) error {
+	err := users.Update(bson.M{"_id": bson.ObjectIdHex(userID)}, bson.M{"$set": bson.M{"QR": QRurl}})
+	if err != nil {
+		panic(err)
+	}
+
+	return nil
+}
+
+func DeleteFromOrders(userID, storeID string) error {
+	err := store.Update(bson.M{"_id": bson.ObjectIdHex(storeID)}, bson.M{"$pull": bson.M{"orders": bson.M{"userid": userID}}})
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // func main() {
 // 	orders := ListOrders("5a1931df0197d51ab40f7a59")
 // 	fmt.Println(orders)
