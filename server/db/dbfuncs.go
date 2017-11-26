@@ -78,7 +78,8 @@ func insertUserMedicineCourse(user User) error {
 }
 
 func insertUserQRCode(user *User) (string, error) {
-	qrURL, err := qr.CreateQR("http://chack-server.azurewebsites.net/"+user.Id, user.Id)
+	// log.Println(user.Order)
+	qrURL, err := qr.CreateQR("http://chack-server.azurewebsites.net/user/checkout_order/"+user.Id+"/"+user.Order, user.Id)
 
 	err = users.Update(bson.M{"_id": bson.ObjectIdHex(user.Id)}, bson.M{"order": qrURL})
 	if err != nil {
@@ -102,7 +103,8 @@ func PlaceOrder(order structs.UserOrderRequest) (string, error) {
 		return "", err
 	}
 	url, err := insertUserQRCode(&User{
-		Id: order.UserID,
+		Id:    order.UserID,
+		Order: order.StoreID,
 	})
 	if err != nil {
 		return "", err

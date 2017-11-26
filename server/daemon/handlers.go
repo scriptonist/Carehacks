@@ -120,9 +120,15 @@ func UploadPrescription() http.Handler {
 func ValidateQR() http.Handler {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
+			log.Println("handler")
 			vars := mux.Vars(r)
 			userID := vars["user_id"]
+			storeID := vars["store_id"]
 			// Find user Id in users table and delete it.
+			err := db.DeleteFromOrders(userID, storeID)
+			if err != nil {
+				respondWithJSON(w, http.StatusBadRequest, "Order not found")
+			}
 			log.Println("Validated ", userID)
 		},
 	)
