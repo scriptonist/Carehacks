@@ -20,7 +20,7 @@
         <div class="col-12 col-xs-12 col-md-12 col-lg-12">
           
             <ul>
-              <h3 ><li style="padding-top:10px;" v-on:click='clicker(med.id)' v-for="med in medicines"> {{med.name}} </li></h3>
+              <h3><li style="padding-top:10px;" v-on:click='clicker(med.id)' v-for="med in medicines"> {{med.name}} </li></h3>
             </ul>
           
         </div>
@@ -64,6 +64,9 @@
       clicker: function (id) {
         this.$store.dispatch('setAddMed', id)
       }
+    },
+    created: function () {
+      this.$store.commit('setDestroyCart')
     }
   }
 </script>

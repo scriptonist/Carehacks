@@ -17,12 +17,20 @@
       </div>
     </div>
 
-
+    <div class="container-fluid">
+      <div class="row">
+        <div style="padding-top: 50px;"class="col-12 col-xs-12 col-md-12 col-sm-12 col-lg-12 center">
+          <div v-on:click='clicker()'>
+            <button type="button" class="mad-button-border-purple">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import Navbar from '@/components/Navbar'
+  import Navbar from '@/components/NavbarT'
   import QRcode from '@/components/QRcode.vue'
   export default {
     name: 'UserHome',
@@ -40,12 +48,35 @@
           }
         ],
         user: 'User',
-        brandplaceholder: 'Brand Name'
+        brandplaceholder: 'Brand Name',
+        lat: null,
+        long: null
       }
     },
     components: {
       'navbar': Navbar,
       'qrcode': QRcode
+    },
+    created: function () {
+      this.$store.commit('setDestroyCart')
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.savePosition)
+      } else {
+        this.msg1 = 'Geolocation is not supported by this browser.'
+      }
+    },
+    methods: {
+      savePosition: function (position) {
+        this.lat = position.coords.latitude
+        this.long = position.coords.longitude
+      },
+      clicker: function () {
+        if (this.lat != null) {
+          this.$router.push({path: 'uhome'})
+        } else {
+          alert('Click Allow Access Location')
+        }
+      }
     }
   }
 </script>

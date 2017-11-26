@@ -99,6 +99,33 @@ button{
     border-radius: 18px;
 }
 
+.mad-button-border-purple{
+    border-color:white;
+    border-width: 2.5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 40px;
+    border-radius: 25px;
+    color: white;
+    transition: all  0.35s ease-out;
+    border-style: solid;
+    background-color: none;    
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.mad-button-border-purple:focus,
+.mad-button-border-purple:hover,
+.mad-button-border-purple:active{
+    border-color:#795be2;
+    border-width: 2.5px;
+    color: #795be2;
+    border-style: solid;
+    background-color: none;
+    border-radius: 18px;
+}
+
 /* Card Button */
 
 .mad-button-card-default{
