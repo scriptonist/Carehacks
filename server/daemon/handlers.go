@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/scriptonist/Carehacks/server/azure"
 	db "github.com/scriptonist/Carehacks/server/db"
 	"github.com/scriptonist/Carehacks/server/structs"
@@ -50,6 +51,15 @@ func SearchForMedicines() http.Handler {
 func UserOrder() http.Handler {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
+			order := structs.UserOrderRequest{}
+			err := json.NewDecoder(r.Body).Decode(&order)
+			if err != nil {
+				respondWithError(w, http.StatusBadRequest, err.Error())
+			}
+			err = db.PlaceOrder(order)
+			if err != nil {
+				respondWithError(w, http.StatusBadRequest, err.Error())
+			}
 
 			respondWithJSON(w, http.StatusOK, "not implemented")
 		},
@@ -68,9 +78,10 @@ func UploadPrescription() http.Handler {
 		log.Println(file)
 		if err != nil {
 			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
-				Message: "Upload Failed",
+				Message: fmt.Sprintf("Upload Failed %v", err),
 				Done:    false,
 			})
+			return
 		}
 		defer file.Close()
 		fileContents := make([]byte, h.Size)
@@ -78,26 +89,40 @@ func UploadPrescription() http.Handler {
 		l, err := file.Read(fileContents)
 		if err != nil {
 			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
-				Message: "Upload Failed",
+				Message: "Failed to read contents of file",
 				Done:    false,
 			})
+			return
 		}
 
 		log.Println(l)
 		url, err := azure.CreatePrescriptionBlob(h.Filename, &fileContents, mimeType)
 		if err != nil {
 			respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
-				Message: "Upload Failed",
+				Message: fmt.Sprintf("Upload Failed %v", err),
 				Done:    false,
 			})
+			return
 		}
 
-		respondWithJSON(w, http.StatusInternalServerError, structs.UploadPrescriptionResponse{
+		respondWithJSON(w, http.StatusOK, structs.UploadPrescriptionResponse{
 			Message: "Upload Done",
 			Done:    true,
 			URL:     url,
 		})
 	},
+	)
+}
+
+// ValidateQR --
+func ValidateQR() http.Handler {
+	return http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			vars := mux.Vars(r)
+			userID := vars["user_id"]
+			// Find user Id in users table and delete it.
+			log.Println("Validated ", userID)
+		},
 	)
 }
 
