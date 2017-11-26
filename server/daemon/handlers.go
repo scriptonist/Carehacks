@@ -56,12 +56,14 @@ func UserOrder() http.Handler {
 			if err != nil {
 				respondWithError(w, http.StatusBadRequest, err.Error())
 			}
-			err = db.PlaceOrder(order)
+			qrurl, err := db.PlaceOrder(order)
 			if err != nil {
 				respondWithError(w, http.StatusBadRequest, err.Error())
 			}
 
-			respondWithJSON(w, http.StatusOK, "not implemented")
+			respondWithJSON(w, http.StatusOK, &structs.UserOrderResponse{
+				QrURL: qrurl,
+			})
 		},
 	)
 }

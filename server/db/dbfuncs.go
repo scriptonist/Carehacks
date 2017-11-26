@@ -1,6 +1,7 @@
 package db
 
 import (
+	"github.com/scriptonist/Carehacks/server/qr"
 	"gopkg.in/mgo.v2/bson"
 
 	"github.com/scriptonist/Carehacks/server/structs"
@@ -76,6 +77,17 @@ func insertUserMedicineCourse(user User) error {
 	return nil
 }
 
+func insertUserQRCode(user *User) (string, error) {
+	qrURL, err := qr.CreateQR("http://chack-server.azurewebsites.net/"+user.Id, user.Id)
+
+	err = users.Update(bson.M{"_id": bson.ObjectIdHex(user.Id)}, bson.M{"order": qrURL})
+	if err != nil {
+		return "", err
+	}
+
+	return qrURL, nil
+}
+
 func MedicineSearch(searchDetails structs.SearchForMedicinesRequest) *structs.SearchForMedicinesResponse {
 	var searchResult []structs.StoreResult
 	store.Find(bson.M{"inventory.name": bson.M{"$all": searchDetails.Medicine}, "coordinates": bson.M{"$geoWithin": bson.M{"$centerSphere": []interface{}{[]interface{}{searchDetails.Lat, searchDetails.Lon}, 5 / 3963.2}}}}).All(&searchResult)
@@ -83,14 +95,19 @@ func MedicineSearch(searchDetails structs.SearchForMedicinesRequest) *structs.Se
 	return &structs.SearchForMedicinesResponse{Stores: searchResult}
 }
 
-func PlaceOrder(order structs.UserOrderRequest) error {
+func PlaceOrder(order structs.UserOrderRequest) (string, error) {
 	order.Status = "False"
 	err := store.Update(bson.M{"_id": bson.ObjectIdHex(order.StoreID)}, bson.M{"$push": bson.M{"orders": order}})
 	if err != nil {
-		return err
+		return "", err
 	}
-
-	return nil
+	url, err := insertUserQRCode(&User{
+		Id: order.UserID,
+	})
+	if err != nil {
+		return "", err
+	}
+	return url, err
 }
 
 func ListOrders(storeID string) Store {
