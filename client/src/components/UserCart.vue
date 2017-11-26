@@ -45,24 +45,24 @@
         ],
         pharmaDetail: [
           {
-            id: 121,
-            name: 'pharmacy Goodwill',
-            dist: 25
+            id: 120,
+            name: 'Ayurvedic Medical',
+            dist: 5
           },
           {
-            id: 125,
-            name: 'Lalaland',
-            dist: 21
+            id: 121,
+            name: 'City Medicals',
+            dist: 7
+          },
+          {
+            id: 122,
+            name: 'Karunya Pharmacy',
+            dist: 8
           },
           {
             id: 123,
-            name: 'Lalaland',
-            dist: 21
-          },
-          {
-            id: 120,
-            name: 'Lalaland',
-            dist: 21
+            name: 'Statue Medicals',
+            dist: 8
           }
         ],
         user: 'User',

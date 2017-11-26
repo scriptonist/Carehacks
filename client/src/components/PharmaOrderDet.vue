@@ -71,7 +71,7 @@ export default {
       name: 'John Smith',
       number: '8086699507',
       email: 'johnsmith@gmail.com',
-      location: 'Kottayam',
+      location: 'Trivandrum',
       medNo: 3,
       orderid: 1289367,
       status: 'Pending',
@@ -82,7 +82,7 @@ export default {
           medPrice: 29
         },
         {
-          medName: 'Adol 500mg',
+          medName: 'Dolo 500mg',
           medQty: 3,
           medPrice: 29
         }
@@ -97,6 +97,11 @@ export default {
           link: '/porder'
         }
       ]
+    }
+  },
+  methods: {
+    confirm: function () {
+      this.$router.push({path: '/phome'})
     }
   },
   components: {
