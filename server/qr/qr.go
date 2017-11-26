@@ -2,6 +2,7 @@ package qr
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/scriptonist/Carehacks/server/azure"
 	qrcode "github.com/skip2/go-qrcode"
@@ -10,6 +11,7 @@ import (
 // CreateQR creates QR Stores it in azure blob
 // Returns a URL and eroor
 func CreateQR(url, blobname string) (string, error) {
+	log.Println(url)
 	var png []byte
 	png, err := qrcode.Encode(url, qrcode.Medium, 256)
 	if err != nil {

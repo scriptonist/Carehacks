@@ -56,12 +56,14 @@ func UserOrder() http.Handler {
 			if err != nil {
 				respondWithError(w, http.StatusBadRequest, err.Error())
 			}
-			err = db.PlaceOrder(order)
+			qrurl, err := db.PlaceOrder(order)
 			if err != nil {
 				respondWithError(w, http.StatusBadRequest, err.Error())
 			}
 
-			respondWithJSON(w, http.StatusOK, "not implemented")
+			respondWithJSON(w, http.StatusOK, &structs.UserOrderResponse{
+				QrURL: qrurl,
+			})
 		},
 	)
 }
@@ -118,9 +120,15 @@ func UploadPrescription() http.Handler {
 func ValidateQR() http.Handler {
 	return http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
+			log.Println("handler")
 			vars := mux.Vars(r)
 			userID := vars["user_id"]
+			storeID := vars["store_id"]
 			// Find user Id in users table and delete it.
+			err := db.DeleteFromOrders(userID, storeID)
+			if err != nil {
+				respondWithJSON(w, http.StatusBadRequest, "Order not found")
+			}
 			log.Println("Validated ", userID)
 		},
 	)

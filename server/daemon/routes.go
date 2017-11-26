@@ -60,6 +60,6 @@ func initRoutes() *mux.Router {
 	m.Handle("/search", SearchForMedicines()).Methods("POST")
 	m.Handle("/user/upload_prescription", UploadPrescription()).Methods("POST")
 	m.Handle("/user/order", UserOrder()).Methods("POST")
-	m.Handle("/user/checkout_order/{user_id}", UserOrder()).Methods("POST")
+	m.Handle("/user/checkout_order/{user_id}/{store_id}", ValidateQR()).Methods("GET")
 	return m
 }
