@@ -1,15 +1,26 @@
 <template>
-  <div>
+  <div class="mad-full-screen mad-background-orange">
 
     <nav>
       <m-navbar v-bind:navlist="navlist">></m-navbar>
     </nav>
+    <div class="container-fluid">
+      <div class="col-12 col-xs-12 col-md-12 col-sm-12 col-lg-12">
+        <h2 style="padding-top: 50px;" class="shadow center white">{{userTitle}} </h2>
+      </div>
+    </div>
+
+    <div class="container-fluid welcome">
+      <div class="col-12 col-xs-12 col-md-12 col-sm-12 col-lg-12">
+        <h1 style="margin-top: 25vh;" class="shadow center white">Welcome to Mule</h1>
+      </div>
+    </div>
 
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/NavbarT'
 
 export default {
   data () {
@@ -35,6 +46,9 @@ export default {
 </script>
 
 <style scoped>
+.shadow {
+  text-shadow: 5px 5px 15px rgba(1,1,1,0.5);
+}
 body {
     font-family: 'Quicksand', sans-serif;
     overflow-x: hidden;
