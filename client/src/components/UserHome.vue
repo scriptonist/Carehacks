@@ -37,7 +37,7 @@
           }
         ],
         user: 'User',
-        brandplaceholder: 'Brand Name'
+        brandplaceholder: 'Mule'
       }
     },
     components: {

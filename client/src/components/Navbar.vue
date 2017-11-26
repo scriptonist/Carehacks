@@ -5,7 +5,7 @@
       <div class="mad-nav-space">
 
         <div class="mad-brand">
-          <a  href="#">Brand Company</a>
+          <a  href="#">mule</a>
         </div>
 
         <div class="mad-nav-main-center">
@@ -60,7 +60,7 @@
 }
 
 .mad-nav-space{
-  padding-top: 20px;
+  padding-top: 15px;
   padding-left: 20px;
   padding-right: 40px;
   display: block;
@@ -72,7 +72,7 @@
 }
 
 .mad-nav-space .mad-brand a {
-  font-size: 20px;
+  font-size: 29px;
   text-decoration: none;
   color: #795be2;
   -webkit-transition: all 0.5s ease-in;
@@ -87,7 +87,7 @@
 
 .mad-nav-space .mad-nav-main-center{
   float: right;
-  padding-top: 3px;
+  padding-top: 8px;
 }
 
 .mad-nav-main-center ul li{
