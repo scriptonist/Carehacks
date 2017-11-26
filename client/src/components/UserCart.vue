@@ -78,13 +78,6 @@
     },
     components: {
       'navbar': Navbar
-    },
-    created: function () {
-      console.log('created')
-      this.$store.commit('setCart', false)
-    },
-    destroyed: function () {
-      this.$store.commit('setCart', true)
     }
   }
 </script>

@@ -10,7 +10,7 @@ export default new Vuex.Store({
     month: null,
     year: null,
     meds: [],
-    cart: true,
+    cart: false,
     username: null,
     usernumber: null,
     useremail: null,
@@ -88,8 +88,9 @@ export default new Vuex.Store({
     setYear: (state, year) => {
       state.year = year
     },
-    setCart: (state, cart) => {
-      state.cart = cart
+    setDestroyCart: (state) => {
+      state.cart = false
+      state.meds = []
     },
     setAddMed: (state, id) => {
       var number = 0
@@ -110,7 +111,13 @@ export default new Vuex.Store({
           state.meds.push(n)
         }
       }
-      console.log(state.meds.length)
+
+      if (state.meds.length === 0) {
+        state.cart = false
+      } else {
+        state.cart = true
+      }
+      // console.log(state.meds.length)
       // console.log(state.meds[0].id)
     },
     setUserName: (state, username) => {
@@ -153,11 +160,6 @@ export default new Vuex.Store({
       context.commit('setDate', year)
     },
     setAddMed: (context, id) => {
-      /* for(var i = 0; i<context.meds.length; i++)
-      {
-      } */
-      // console.log(context.meds.length)
-      // context.commit('setAddMed', id)
       context.commit('setAddMed', id)
     }
   }
